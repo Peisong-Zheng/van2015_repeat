@@ -211,12 +211,20 @@ def ccm_significance_test(
 
 
         yx_surrogates = np.column_stack([out_xy["Y:X"].values for out_xy in ran_ccm_list_xy])
-        yx_min = yx_surrogates.min(axis=1)
-        yx_max = yx_surrogates.max(axis=1)
+        # yx_min = yx_surrogates.min(axis=1)
+        # let the yx_min to be the 5th percentile of the yx_surrogates
+        yx_min = np.percentile(yx_surrogates, 5, axis=1)
+        # yx_max = yx_surrogates.max(axis=1)
+        # let the yx_max to be the 95th percentile of the yx_surrogates
+        yx_max = np.percentile(yx_surrogates, 95, axis=1)
 
         xy_surrogates = np.column_stack([out_xy["X:Y"].values for out_xy in ran_ccm_list_xy])
-        xy_min = xy_surrogates.min(axis=1)
-        xy_max = xy_surrogates.max(axis=1)
+        # xy_min = xy_surrogates.min(axis=1)
+        # xy_max = xy_surrogates.max(axis=1)
+        # let the xy_min to be the 5th percentile of the xy_surrogates
+        xy_min = np.percentile(xy_surrogates, 5, axis=1)
+        # let the xy_max to be the 95th percentile of the xy_surrogates
+        xy_max = np.percentile(xy_surrogates, 95, axis=1)
 
         # Fill between min and max for X->Y
         ax.fill_between(libsize, xy_min, xy_max, color="r", alpha=0.2, label='', edgecolor='none')
@@ -225,10 +233,10 @@ def ccm_significance_test(
         ax.fill_between(libsize, yx_min, yx_max, color="b", alpha=0.2, label='', edgecolor='none')
 
 
-        ax.plot(ccm_out["LibSize"], ccm_out["Y:X"], "bo-",
+        ax.plot(ccm_out["LibSize"], ccm_out["Y:X"], "b-",
                 label=fr"$\rho$ ($\hat{{{column_name}}}\mid M_{{{target_name}}}$)")
 
-        ax.plot(ccm_out["LibSize"], ccm_out["X:Y"], "ro-",
+        ax.plot(ccm_out["LibSize"], ccm_out["X:Y"], "r-",
                 label=fr"$\rho$ ($\hat{{{target_name}}}\mid M_{{{column_name}}}$)")
         
         # set the xlim to match the range of the libsize
