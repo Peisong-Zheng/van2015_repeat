@@ -88,7 +88,7 @@ class ccm:
 
 import matplotlib.pyplot as plt
 
-def run_ccm(X, Y, tau=1, E=2, L_min=50, L_max=320, L_step=20):
+def run_ccm(X, Y, tau=1, E=2, L_min=50, L_max=320, L_step=20, if_plot=True):
 
     L_range = range(L_min, L_max, L_step)
     Xhat_My = []  # CCM skill for testing X -> Y
@@ -103,14 +103,15 @@ def run_ccm(X, Y, tau=1, E=2, L_min=50, L_max=320, L_step=20):
         Yhat_Mx.append(ccm_YX.causality()[0])
     
     # Plot the convergence curves.
-    plt.figure(figsize=(5,5))
-    plt.plot(list(L_range), Xhat_My, 'o-', label='$\\hat{X}(t)|M_y$')
-    plt.plot(list(L_range), Yhat_Mx, 'o-', label='$\\hat{Y}(t)|M_x$')
-    plt.xlabel('L', size=12)
-    plt.ylabel('Correlation', size=12)
-    plt.legend(prop={'size': 16})
-    plt.title("Convergence of CCM Skill")
-    plt.show()
+    if if_plot:
+        plt.figure(figsize=(5,5))
+        plt.plot(list(L_range), Xhat_My, 'o-', label='$\\hat{X}(t)|M_y$')
+        plt.plot(list(L_range), Yhat_Mx, 'o-', label='$\\hat{Y}(t)|M_x$')
+        plt.xlabel('L', size=12)
+        plt.ylabel('Correlation', size=12)
+        plt.legend(prop={'size': 16})
+        plt.title("Convergence of CCM Skill")
+        plt.show()
     
     return Xhat_My, Yhat_Mx
 
