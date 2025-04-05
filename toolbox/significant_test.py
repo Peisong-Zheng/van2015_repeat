@@ -12,6 +12,7 @@ def ccm_significance_test(
     libSizes="100 200 300 400 500 600 700",
     Tp=0,
     sample=100,
+    random = True,
     uni_dir=False,
     showPlot=True
 ):
@@ -86,7 +87,7 @@ def ccm_significance_test(
         target      = "Y",   # target
         libSizes    = libSizes,
         sample      = sample,
-        random      = True,
+        random      = random,
         replacement = False,
         Tp          = Tp
     )
@@ -118,7 +119,7 @@ def ccm_significance_test(
             target      = "Y",
             libSizes    = libSizes,
             sample      = sample,
-            random      = True,
+            random      = random,
             replacement = False,
             Tp          = Tp
         )
@@ -253,7 +254,7 @@ def ccm_significance_test(
 
 
 
-    test_result=ccm_significance_hist(ccm_out, ran_ccm_list_xy, uni_dir=uni_dir, column_name=column_name, target_name=target_name, if_plot=True)
+    test_result=ccm_significance_hist(ccm_out, ran_ccm_list_xy, uni_dir=uni_dir, column_name=column_name, target_name=target_name, if_plot=showPlot)
 
     return ccm_out, ran_ccm_list_xy, test_result
 

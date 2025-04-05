@@ -116,6 +116,7 @@ def ccm_DOXmapForcing(df_sd, df_pre,
                       libSizes="100 200 300 400 500 600 700",
                       Tp=0,
                       sample=20,
+                      random = True,
                       showPlot=True):
     """
     Perform Convergent Cross Mapping (CCM) between the second columns of
@@ -179,7 +180,7 @@ def ccm_DOXmapForcing(df_sd, df_pre,
         target      = target_name,   # target
         libSizes    = libSizes,
         sample      = sample,
-        random      = True,
+        random      = random,
         replacement = False,
         Tp          = Tp
     )
