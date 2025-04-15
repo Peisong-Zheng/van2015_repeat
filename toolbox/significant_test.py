@@ -7,7 +7,7 @@ def ccm_significance_test(
     df_sd, 
     df_pre,
     E=4, 
-    tau=8, 
+    tau=-1, 
     n_ran=20, 
     libSizes="100 200 300 400 500 600 700",
     Tp=0,
@@ -61,7 +61,8 @@ def ccm_significance_test(
             np.random.seed(seed)
         
         # randomly select a break point between 2/10 and 8/10 of the data
-        break_point = np.random.randint(len(stadial_data)//5, len(stadial_data)*4//5)
+        # break_point = np.random.randint(len(stadial_data)//5, len(stadial_data)*4//5)
+        break_point = np.random.randint(abs(tau), len(stadial_data)-abs(tau))
         randomized_swapped = np.concatenate([stadial_data[break_point:], stadial_data[:break_point]])
         
         return randomized_swapped
